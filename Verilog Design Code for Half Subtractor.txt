@@ -1,0 +1,29 @@
+// Verilog Design Code for Half Subtractor //
+module half_subtractor(a,b,d,bo);
+ input a,b;
+ output d,bo;
+		assign d = a^b;    // difference = a (XOR) b    //
+		assign bo = (~a)&b;    //  borrow = (NOT)a (AND) b //
+	end
+endmodule
+
+
+
+// Verilog Test Bench //
+
+module test();
+ reg a,b;
+ wire d,b_o;
+ half_subtractor h1 (a,b,d,bo);           // instantiate design file //
+  initial 
+    begin
+      a = 1'b1;
+      b = 1'b0;
+      $display("difference=%d, borrow=%d",d,bo);
+      #10;
+      a = 1'b1;
+      b = 1'b1;
+      $display("difference=%d, borrow=%d",d,bo);
+      #10;
+    end
+endmodule

@@ -3,7 +3,7 @@ module half_adder(a,b,sum,c_out);
  input a,b;
  output sum,c_out;
 		assign s = a^b;    // sum = a (XOR) b    //
-		assign c = ab;    //  carry = a (AND) b //
+		assign c = a&b;    //  carry = a (AND) b //
 	end
 endmodule
 

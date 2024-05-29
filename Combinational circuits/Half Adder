@@ -1,0 +1,29 @@
+// Verilog Design Code for Half Adder //
+module half_adder(a,b,sum,c_out);
+ input a,b;
+ output sum,c_out;
+		assign s = a^b;    // sum = a (XOR) b    //
+		assign c = a&b;    //  carry = a (AND) b //
+	end
+endmodule
+
+
+
+// Verilog Test Bench //
+
+module test();
+ reg a,b;
+ wire sum,c_out;
+ adder a1(a,b,s,c);           // instantiate design file //
+  initial 
+    begin
+      a = 1'b1;
+      b = 1'b0;
+      $display("s=%d, c=%d",s,c);
+      #10;
+      a = 1'b1;
+      b = 1'b1;
+      $display("s=%d, c=%d",s,c);
+      #10;
+    end
+endmodule

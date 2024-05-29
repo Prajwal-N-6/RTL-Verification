@@ -2,8 +2,8 @@
 module half_adder(a,b,sum,c_out);
  input a,b;
  output sum,c_out;
-		assign s = a^b;    // sum = a (XOR) b    //
-		assign c = a&b;    //  carry = a (AND) b //
+		assign sum = a^b;    // sum = a (XOR) b    //
+		assign c_out = a&b;    //  carry = a (AND) b //
 	end
 endmodule
 
@@ -14,16 +14,16 @@ endmodule
 module test();
  reg a,b;
  wire sum,c_out;
- adder a1(a,b,s,c);           // instantiate design file //
+ half_adder a1(a,b,sum,c_out);           // instantiate design file //
   initial 
     begin
       a = 1'b1;
       b = 1'b0;
-      $display("s=%d, c=%d",s,c);
+      $display("s=%d, c=%d",sum,c_out);
       #10;
       a = 1'b1;
       b = 1'b1;
-      $display("s=%d, c=%d",s,c);
+      $display("s=%d, c=%d",sum,c_out);
       #10;
     end
 endmodule

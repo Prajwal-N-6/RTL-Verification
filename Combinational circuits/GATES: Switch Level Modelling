@@ -1,0 +1,290 @@
+// AND GATE //
+//**********************Design**************************//
+module andgate(a,b,y,l,m);
+input a,b;
+output y;
+wire l,m;
+supply1 vdd;
+supply0 gnd;
+pmos p1(m,vdd,a);
+pmos p2(m,vdd,b);
+nmos n2(l,gnd,b);
+nmos n1(m,l,a);
+pmos p3(y,vdd,m);
+nmos n3(y,gnd,m);
+endmodule
+////////////////////////////////////////////////////////
+
+//********************Test bench***********************//
+module andgate_test;
+reg a_t,b_t;
+wire y_t;
+andgate A1(.a(a_t),.b(b_t),.y(y_t));
+initial 
+begin
+	a_t=1’b0;
+	b_t=1’b0;
+	#10;
+	$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	repeat(5)
+	begin
+		a_t=$random;
+		b_t=$random;
+		#10;
+		$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	end
+end
+endmodule
+////////////////////////////////////////////////////////
+
+// NAND gate //
+//***********************Design***********************//
+module nandgate(a,b,y);
+input a,b;
+output y;
+wire l;
+supply1 vdd;
+supply0 gnd;
+pmos p1(y,vdd,a);
+pmos p2(y,vdd,b);
+nmos n2(l,gnd,b);
+nmos n1(y,l,a);
+endmodule
+////////////////////////////////////////////////////////
+
+//***********************Test bench******************//
+module nandgate_test;
+reg a_t,b_t;
+wire y_t;
+nandgate A1(.a(a_t),.b(b_t),.y(y_t));
+initial 
+begin
+	a_t=1’b0;
+	b_t=1’b0;
+	#10;
+	$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	repeat(5)
+	begin
+		a_t=$random;
+		b_t=$random;
+		#10;
+		$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	end
+end
+endmodule
+////////////////////////////////////////////////////////
+
+// NOR gate //
+//*************************Design******************//
+module norgate(a,b,y);
+input a,b;
+output y;
+wire l;
+supply1 vdd;
+supply0 gnd;
+pmos p1(l,vdd,a);
+pmos p2(y,l,b);
+nmos n2(y,gnd,b);
+nmos n1(y,gnd,a);
+endmodule
+////////////////////////////////////////////////////////
+
+//***********************Test bench********************//
+module norgate_test;
+reg a_t,b_t;
+wire y_t;
+norgate A1(.a(a_t),.b(b_t),.y(y_t));
+initial 
+begin
+	a_t=1’b0;
+	b_t=1’b0;
+	#10;
+	$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	repeat(5)
+	begin
+		a_t=$random;
+		b_t=$random;
+		#10;
+		$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	end
+end
+endmodule
+////////////////////////////////////////////////////////
+
+// NOT gate //
+//***********************Design*********************//
+module notgate(a,y);
+input a;
+output y;
+supply1 vdd;
+supply0 gnd;
+pmos p1(y,vdd,a);
+nmos n1(y,gnd,a);
+endmodule
+////////////////////////////////////////////////////////
+
+//*****************Test bench*************************//
+module notgate_test;
+reg a_t;
+wire y_t;
+notgate N1(.a(a_t),.y(y_t));
+initial
+begin
+	repeat(5)
+	begin
+		a_t=$random;
+		#10;
+		$display(“a=%d y=%d”,a_t,y_t);
+	end
+end
+endmodule
+////////////////////////////////////////////////////////
+
+// OR gate//
+//******************Design**************************//
+module orgate(a,b,y);
+input a,b;
+output y;
+wire l,m;
+supply1 vdd;
+supply0 gnd;
+pmos p1(l,vdd,a);
+pmos p2(m,l,b);
+nmos n2(m,gnd,b);
+nmos n1(m,gnd,a);
+pmos p3(y,vdd,m);
+nmos n3(y,gnd,m);
+endmodule
+////////////////////////////////////////////////////////
+
+//******************Test bench*********************//
+module orgate_test;
+reg a_t,b_t;
+wire y_t;
+orgate A1(.a(a_t),.b(b_t),.y(y_t));
+initial 
+begin
+	a_t=1’b0;
+	b_t=1’b0;
+	#10;
+	$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	repeat(5)
+	begin
+		a_t=$random;
+		b_t=$random;
+		#10;
+		$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	end
+end
+endmodule
+////////////////////////////////////////////////////////
+
+// XNOR gate //
+//************************Design***********************//
+module xnorgate(a,b,y);
+input a,b;
+output y;
+wire l,m,n,p,q,r,o,abar,bbar;
+supply1 vdd;
+supply0 gnd;
+pmos p1(abar,vdd,a);
+nmos n1(abar,gnd,a);
+pmos p2(x,vdd,abar);
+pmos p3(x,vdd,b);
+pmos p4(m,vdd,x);
+nmos n2(l,gnd,b);
+nmos n3(x,l,abar);
+nmos n4(m,gnd,x);
+pmos p5(bbar,vdd,b);
+nmos n5(bbar,gnd,b);
+pmos p6(p,vdd,bbar);
+pmos p7(p,vdd,a);
+nmos n6(q,gnd,a);
+nmos n7(p,q,bbar);
+pmos p8(n,vdd,p);
+nmos n8(n,gnd,p);
+pmos p9(r,vdd,m);
+pmos p10(o,r,n);
+nmos n9(y,gnd,m);
+nmos n10(y,gnd,n);
+endmodule
+////////////////////////////////////////////////////////
+
+//*********************Test bench*******************//
+module xnorgate_test;
+reg a_t,b_t;
+wire y_t;
+xnorgate A1(.a(a_t),.b(b_t),.y(y_t));
+initial 
+begin
+	a_t=1’b0;
+	b_t=1’b0;
+	#10;
+	$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	repeat(5)
+	begin
+		a_t=$random;
+		b_t=$random;
+		#10;
+		$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	end
+end
+endmodule
+////////////////////////////////////////////////////////
+
+// XOR gate //
+//*********************Design*************************//
+module xorgate(a,b,y);
+input a,b;
+output y;
+wire l,m,n,p,q,r,o,abar,bbar;
+supply1 vdd;
+supply0 gnd;
+pmos p1(abar,vdd,a);
+nmos n1(abar,gnd,a);
+pmos p2(x,vdd,abar);
+pmos p3(x,vdd,b);
+nmos n2(l,gnd,b);
+nmos n3(x,l,abar);
+pmos p4(m,vdd,x);
+nmos n4(m,gnd,x);
+pmos p5(bbar,vdd,b);
+nmos n5(bbar,gnd,b);
+pmos p6(p,vdd,bbar);
+pmos p7(p,vdd,a);
+nmos n6(q,gnd,a);
+nmos n7(p,q,bbar);
+pmos p8(n,vdd,p);
+nmos n8(n,gnd,p);
+pmos p9(r,vdd,m);
+pmos p10(o,r,n);
+nmos n9(o,gnd,m);
+nmos n10(o,gnd,n);
+pmos p11(y,vdd,o);
+nmos n11(y,gnd,o);
+endmodule
+////////////////////////////////////////////////////////
+
+//*********************Test bench*******************//
+module xorgate_test;
+reg a_t,b_t;
+wire y_t;
+xorgate A1(.a(a_t),.b(b_t),.y(y_t));
+initial 
+begin
+	a_t=1’b0;
+	b_t=1’b0;
+	#10;
+	$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	repeat(5)
+	begin
+		a_t=$random;
+		b_t=$random;
+		#10;
+		$display(“a=%d b=%d y=%d”,a_t,b_t,y_t);
+	end
+end
+endmodule
+////////////////////////////////////////////////////////
+
+

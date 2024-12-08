@@ -23,8 +23,9 @@ sequence
 req.ip2), UVM_LOW); // Log sequence item details 
       vif.ip1 <= req.ip1;     // Drive ip1 to DUT via virtual interface 
       vif.ip2 <= req.ip2;     // Drive ip2 to DUT via virtual interface 
-      seq_item_port.item_done(); // Notify sequencer that item processing is 
-done 
+      seq_item_port.item_done(); // Notify sequencer that item processing is done 
+      repeat(2)
+         @(posedge vif.clk);
     end 
   endtask 
 endclass

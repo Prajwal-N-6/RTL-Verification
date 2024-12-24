@@ -27,6 +27,7 @@ from the agent
     end 
      
     phase.drop_objection(this);   // Drop objection to end the test 
+    phase.phase_done.set_drain_time(this,10ns);
     `uvm_info(get_type_name, "End of testcase", UVM_LOW); // Display end of 
 testcase info 
   endtask 
